@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductService } from '../product.service';
 import { FormControl } from '@angular/forms';
@@ -61,21 +61,12 @@ export class ProductDetailComponentComponent implements OnInit {
       data => {
         this.product.name = data.name;
         this.product.price = data.price;
+        this.productService.sendChangeEvent(this.productId);
       },
       error => {
         console.error('Error: ', error);
       }
     );
-
-    /*const newName = this.newName.getRawValue();
-    if(newName){
-      this.product.name = newName;
-    }
-
-    const newPrice = this.newPrice.getRawValue();
-    if(newPrice){
-      this.product.price = newPrice;
-    }*/
     
   }
 

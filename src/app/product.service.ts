@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, tap } from 'rxjs';
+import { Observable, Subject, catchError, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
+  private changeEventSource = new Subject<number>();
+  public changeObservable$ = this.changeEventSource.asObservable();
+  
   private productListEndpoint = 'http://localhost:3000/products/';
   private categories = ['Show All'];
 
   constructor(private http: HttpClient) { }
+
+  public sendChangeEvent(productId: number) {
+    this.changeEventSource.next(productId);
+  }
 
   public updateProductDetails(productId: number, payload: any) {
     return this.http.post<any>(this.productListEndpoint + productId, payload).pipe(

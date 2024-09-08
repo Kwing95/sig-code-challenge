@@ -24,16 +24,18 @@ export class ProductListComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts();
+
+    this.productService.changeObservable$.subscribe(
+      () => {
+        this.loadProducts();
+      }
+    );
   }
 
   public openProductDetails(product: any): void{
       const dialogRef = this.dialog.open(ProductDetailComponentComponent, {
         data: product.id
       });
-  
-      // dialogRef.afterClosed().subscribe(result => {
-      //   this.animal = result;
-      // });
   }
 
   private refreshVisibleProducts(filter: any): void {
