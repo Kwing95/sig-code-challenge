@@ -12,6 +12,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  public updateProductDetails(productId: number, payload: any) {
+    return this.http.post<any>(this.productListEndpoint + productId, payload).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public getProducts(): Observable<any> {
     return this.http.get<any>(this.productListEndpoint).pipe(
       tap(response => this.parseProductCategories(response)),

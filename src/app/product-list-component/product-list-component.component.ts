@@ -26,9 +26,8 @@ export class ProductListComponentComponent implements OnInit {
     this.loadProducts();
   }
 
-  public openProductDetails(product: any){
+  public openProductDetails(product: any): void{
       const dialogRef = this.dialog.open(ProductDetailComponentComponent, {
-        width: '250px',
         data: product.id
       });
   
