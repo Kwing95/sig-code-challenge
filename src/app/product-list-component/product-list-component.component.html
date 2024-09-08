@@ -1,5 +1,3 @@
-<p>product-list-component works!</p>
-
 <mat-form-field>
     <mat-label>Filter</mat-label>
     <mat-select [formControl]="onFilterChange">
@@ -10,7 +8,7 @@
 </mat-form-field>
 
 <div class="container">
-    <div *ngFor="let product of visibleProducts" class="item">
+    <div *ngFor="let product of visibleProducts" class="item" (click)="openProductDetails(product)">
         <p>Name: {{product.name}}</p>
         <p>Price: ${{product.price}}</p>
         <p>Category: {{product.category}}</p>

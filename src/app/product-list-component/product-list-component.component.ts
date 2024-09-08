@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductDetailComponentComponent } from '../product-detail-component/product-detail-component.component';
 
 @Component({
   selector: 'app-product-list-component',
@@ -14,7 +16,7 @@ export class ProductListComponentComponent implements OnInit {
   public categories = new Array<string>();
   public onFilterChange = new FormControl('');
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private dialog: MatDialog) {
     this.onFilterChange.valueChanges.subscribe((filter) => {
       this.refreshVisibleProducts(filter);
     });
@@ -22,6 +24,17 @@ export class ProductListComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts();
+  }
+
+  public openProductDetails(product: any){
+      const dialogRef = this.dialog.open(ProductDetailComponentComponent, {
+        width: '250px',
+        data: product.id
+      });
+  
+      // dialogRef.afterClosed().subscribe(result => {
+      //   this.animal = result;
+      // });
   }
 
   private refreshVisibleProducts(filter: any): void {

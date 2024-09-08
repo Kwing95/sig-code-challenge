@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ProductListComponentComponent } from './product-list-component/product-list-component.component';
 import { ProductDetailComponentComponent } from './product-detail-component/product-detail-component.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'; 
@@ -21,6 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatChipsModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatSelectModule,
     NoopAnimationsModule,

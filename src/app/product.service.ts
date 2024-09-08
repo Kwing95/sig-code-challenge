@@ -7,14 +7,20 @@ import { Observable, catchError, tap } from 'rxjs';
 })
 export class ProductService {
 
-  private apiUrl = 'http://localhost:3000/products';
+  private productListEndpoint = 'http://localhost:3000/products/';
   private categories = ['Show All'];
 
   constructor(private http: HttpClient) { }
 
   public getProducts(): Observable<any> {
-    return this.http.get<any>(this.apiUrl).pipe(
+    return this.http.get<any>(this.productListEndpoint).pipe(
       tap(response => this.parseProductCategories(response)),
+      catchError(this.handleError)
+    );
+  }
+
+  public getProductDetails(productId: number): Observable<any> {
+    return this.http.get<any>(this.productListEndpoint + productId).pipe(
       catchError(this.handleError)
     );
   }
@@ -33,7 +39,7 @@ export class ProductService {
 
   private handleError(error: any): Observable<never> {
     console.error('ERROR:', error);
-    throw new Error('Error in getProducts');
+    throw new Error('Error');
   }
 
 }
